@@ -48,12 +48,15 @@ def main():
     from gi.repository import Gtk
     from firstart_lib.FirstartEntry import FirstartEntry
     from assistant.FirstartWindow import FirstartWindow
+    import os
 
     entry = FirstartEntry()
     if entry.get_firstart() == True:
         return
 
     entry.set_firstart(1)
+    entry.remove_flag()
+
 
     w = FirstartWindow()
     w.show()
