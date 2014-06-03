@@ -1,0 +1,21 @@
+Source: gecosws-firstart
+Section: utils
+Priority: optional
+Maintainer: Alfredo Matas <amatas@emergya.com>
+Uploaders: Alfredo Matas <amatas@emergya.com>
+Build-Depends: debhelper (>= 8), cdbs (>=0.4.43), python-all-dev (>=2.3.5-11), python-support
+Build-Depends-Indep: gettext, python-distutils-extra
+Standards-Version: 3.8.3
+Homepage: https://github.com/gecos-team/gecosws-firstart
+Vcs-Browser: https://github.com/gecos-team/gecosws-firstart
+Vcs-Bzr: https://github.com/gecos-team/gecosws-firstart
+XS-Python-Version: current
+
+Package: gecosws-firstart
+Architecture: all
+Depends: ${misc:Depends}, python, python-requests, python-xdg, synaptic
+Description: Aplicacion para informar los clientes de GECOS
+ Aplicacion encargada de bloquear el la entra de escritorio en el primer
+ arranque, con la idea de que chef-client haga su trabajo antes de permitir
+ la entrada al usuario.
+
