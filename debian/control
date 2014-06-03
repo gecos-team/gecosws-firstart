@@ -13,7 +13,7 @@ XS-Python-Version: current
 
 Package: gecosws-firstart
 Architecture: all
-Depends: ${misc:Depends}, python, python-requests, python-xdg, synaptic
+Depends: ${misc:Depends}, python, python-requests, python-xdg, synaptic, gecosws-chef-snitch
 Description: Aplicacion para informar los clientes de GECOS
  Aplicacion encargada de bloquear el la entra de escritorio en el primer
  arranque, con la idea de que chef-client haga su trabajo antes de permitir
