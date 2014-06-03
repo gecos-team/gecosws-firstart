@@ -22,6 +22,7 @@ __license__ = "GPL-2"
 
 
 from gi.repository import GObject
+from gi.repository import GLib
 import dbus
 import dbus.service
 from dbus.mainloop.glib import DBusGMainLoop
@@ -61,20 +62,23 @@ class DBusService(dbus.service.Object):
             return
         
         self.set_state(STATE_RUNNING)
-        cmd_check = 'pgrep chef-client'
+        cmd_check = 'gecosws-chef-snitch-client --get-active'
         self.log('Checking for an already running chef-client instance...')
         args = shlex.split(cmd_check)
         while True:
-           if subprocess.Popen(args) == 0:
+           process = subprocess.Popen(args,stdout=subprocess.PIPE)
+           active = process.communicate()[0].rstrip()
+           if active == 'true':
               time.sleep(1)
            else:
               break
-        cmd = '/usr/bin/env chef-client'
+        #Run two chef-client cause its necessary for GCC
+        cmd = 'chef-client && chef-client' 
         self.log('Calling subprocess: ' + cmd)
         args = shlex.split(cmd)
         self.process = subprocess.Popen(args)
 
-        GObject.timeout_add_seconds(1, self.check_state)
+        GLib.timeout_add_seconds(1, self.check_state)
 
     def check_state(self):
         s = self.process.poll()
