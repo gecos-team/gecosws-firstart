@@ -1,5 +1,6 @@
 gecosws-firstart (0.2gecos1) precise; urgency=low
 
+
   * Changed check to gecows-chef-snitch-client
   * Call twice to chef
   * Unused deprecated GObject to GLib function
