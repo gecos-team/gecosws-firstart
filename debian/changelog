@@ -1,4 +1,26 @@
-gecosws-fristart (0.1) precise; urgency=low
+gecosws-firstart (0.4gecos1) precise; urgency=low
+
+  * Merged to master and freeze for precsie version
+
+ -- David Amian <damian@emergya.com>  Wed, 10 Jun 2014 08:47:22 +0200
+
+gecosws-firstart (0.3gecos1) precise; urgency=low
+
+  * Added New Block Icon 
+
+ -- David Amian <damian@emergya.com>  Wed, 04 Jun 2014 17:47:22 +0200
+
+gecosws-firstart (0.2gecos1) precise; urgency=low
+
+
+  * Changed check to gecows-chef-snitch-client
+  * Call twice to chef
+  * Unused deprecated GObject to GLib function
+  * Check if chef its configured
+
+ -- David Amian <damian@emergya.com>  Tue, 03 Jun 2014 19:07:50 +0200
+
+gecosws-firstart (0.1) precise; urgency=low
 
   * First Release
 

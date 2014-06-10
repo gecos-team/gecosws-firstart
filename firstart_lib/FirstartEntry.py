@@ -39,3 +39,6 @@ class FirstartEntry(IniFile):
     def set_firstart(self, value):
         self.set('firstart', value)
         self.write()
+
+    def remove_flag(self):
+        os.remove(os.path.join(os.environ.get('HOME'), '.firstart'))
