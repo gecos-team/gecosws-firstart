@@ -1,3 +1,9 @@
+gecosws-firstart (0.5gecos1) precise; urgency=low
+
+  * Updated version
+
+ -- David Amian <damian@emergya.com>  Wed, 11 Jun 2014 14:19:29 +0200
+
 gecosws-firstart (0.4gecos1) precise; urgency=low
 
   * Merged to master and freeze for precsie version
