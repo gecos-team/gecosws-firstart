@@ -73,10 +73,12 @@ class DBusService(dbus.service.Object):
            else:
               break
         #Run two chef-client cause its necessary for GCC
+        envs = os.environ
+        envs['LANG'] = 'es_ES.UTF-8'
         cmd = 'chef-client && chef-client' 
         self.log('Calling subprocess: ' + cmd)
         args = shlex.split(cmd)
-        self.process = subprocess.Popen(args)
+        self.process = subprocess.Popen(args,env=envs)
 
         GLib.timeout_add_seconds(1, self.check_state)
 
