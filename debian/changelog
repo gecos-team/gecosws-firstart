@@ -1,3 +1,9 @@
+gecosws-firstart (0.5gecos3) trusty; urgency=low
+
+  * Fix rules for trusty 
+
+ -- David Amian <damian@emergya.com>  Tue, 17 Jun 2014 18:24:16 +0200
+
 gecosws-firstart (0.5gecos2) precise; urgency=low
 
   * Updated version

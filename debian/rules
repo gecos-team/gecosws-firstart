@@ -1,7 +1,10 @@
 #!/usr/bin/make -f
+export DH_VERBOSE=1
 
-DEB_PYTHON_SYSTEM=pysupport
+%:
+	dh $@ --with python2
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/python-distutils.mk
+override_dh_auto_clean:
+	dh_clean
+	rm -rf build .*egg-info
 
