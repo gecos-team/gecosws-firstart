@@ -30,6 +30,7 @@ import shlex
 import subprocess
 import syslog
 import time
+import os
 
 
 DBUS_SERVICE = 'org.guadalinex.firstart'
@@ -65,22 +66,27 @@ class DBusService(dbus.service.Object):
         cmd_check = 'gecosws-chef-snitch-client --get-active'
         self.log('Checking for an already running chef-client instance...')
         args = shlex.split(cmd_check)
-        while True:
-           process = subprocess.Popen(args,stdout=subprocess.PIPE)
-           active = process.communicate()[0].rstrip()
-           if active == 'true':
-              time.sleep(1)
-           else:
-              break
+        tries = 0
+        while tries<30:
+            process = subprocess.Popen(args,stdout=subprocess.PIPE)
+            active = process.communicate()[0].rstrip()
+            if active == 'true':
+                time.sleep(1)
+                tries = tries+1
+            else:
+                break
         #Run two chef-client cause its necessary for GCC
-        envs = os.environ
-        envs['LANG'] = 'es_ES.UTF-8'
-        cmd = 'chef-client && chef-client' 
-        self.log('Calling subprocess: ' + cmd)
-        args = shlex.split(cmd)
-        self.process = subprocess.Popen(args,env=envs)
+        if tries<30:
+            envs = os.environ
+            envs['LANG'] = 'es_ES.UTF-8'
+            cmd = 'chef-client && chef-client' 
+            self.log('Calling subprocess: ' + cmd)
+            args = shlex.split(cmd)
+            self.process = subprocess.Popen(args,env=envs)
 
-        GLib.timeout_add_seconds(1, self.check_state)
+            GLib.timeout_add_seconds(1, self.check_state)
+        else:
+            self.set_state(STATE_STOPPED)
 
     def check_state(self):
         s = self.process.poll()
