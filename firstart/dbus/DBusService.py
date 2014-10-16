@@ -61,7 +61,10 @@ class DBusService(dbus.service.Object):
     def run_subprocess(self):
         if self.state == STATE_RUNNING:
             return
-        
+        log_chef_solo = open('/tmp/chef-firstart', "w", 1)
+        log_chef_solo_err = open('/tmp/chef-firstart-err', "w", 1)
+        log_chef_solo1 = open('/tmp/chef-firstart.1', "w", 1)
+        log_chef_solo_err1 = open('/tmp/chef-firstart-err.1', "w", 1)
         self.set_state(STATE_RUNNING)
         cmd_check = 'gecosws-chef-snitch-client --get-active'
         self.log('Checking for an already running chef-client instance...')
@@ -79,10 +82,13 @@ class DBusService(dbus.service.Object):
         if tries<30:
             envs = os.environ
             envs['LANG'] = 'es_ES.UTF-8'
-            cmd = 'chef-client && chef-client' 
+            cmd = 'chef-client'
             self.log('Calling subprocess: ' + cmd)
             args = shlex.split(cmd)
-            self.process = subprocess.Popen(args,env=envs)
+            self.process = subprocess.Popen(args,stdout=log_chef_solo, stderr=log_chef_solo_err, env=envs)
+            self.process.wait()
+            self.process = subprocess.Popen(args,stdout=log_chef_solo1, stderr=log_chef_solo_err1, env=envs)
+            self.process.wait()
 
             GLib.timeout_add_seconds(1, self.check_state)
         else:
