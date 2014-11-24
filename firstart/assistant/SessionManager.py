@@ -24,7 +24,7 @@ __license__ = "GPL-2"
 import os
 import dbus
 import syslog
-
+import lsb_release
 
 SM_DBUS_SERVICE = 'org.gnome.SessionManager'
 SM_DBUS_OBJECT_PATH = '/org/gnome/SessionManager'

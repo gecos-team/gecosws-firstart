@@ -1,3 +1,9 @@
+gecosws-firstart (0.8-0gecos2) trusty; urgency=medium
+
+  * Added import module
+
+ -- David Amian <damian@emergya.es>  Mon, 24 Nov 2014 12:31:11 +0100
+
 gecosws-firstart (0.8-0gecos1) trusty; urgency=medium
 
   * Added support for Lite version
