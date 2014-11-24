@@ -1,3 +1,9 @@
+gecosws-firstart (0.8-0gecos3) trusty; urgency=medium
+
+  * Fix select version of distro
+
+ -- David Amian <damian@emergya.es>  Mon, 24 Nov 2014 12:55:28 +0100
+
 gecosws-firstart (0.8-0gecos2) trusty; urgency=medium
 
   * Added import module

@@ -26,9 +26,15 @@ import dbus
 import syslog
 import lsb_release
 
-SM_DBUS_SERVICE = 'org.gnome.SessionManager'
-SM_DBUS_OBJECT_PATH = '/org/gnome/SessionManager'
-SM_DBUS_CLIENT_PRIVATE_PATH = 'org.gnome.SessionManager.ClientPrivate'
+
+if lsb_release.get_distro_information()['DESCRIPTION'] == 'Gecos V2 Lite':
+    SM_DBUS_SERVICE = 'org.lxde.SessionManager'
+    SM_DBUS_OBJECT_PATH = '/org/lxde/SessionManager'
+    SM_DBUS_CLIENT_PRIVATE_PATH = 'org.lxde.SessionManager.ClientPrivate'
+else:
+    SM_DBUS_SERVICE = 'org.gnome.SessionManager'
+    SM_DBUS_OBJECT_PATH = '/org/gnome/SessionManager'
+    SM_DBUS_CLIENT_PRIVATE_PATH = 'org.gnome.SessionManager.ClientPrivate'
 
 INHIBIT_LOGGIN_OUT = 1
 INHIBIT_USER_SWITCHING = 2
@@ -39,10 +45,6 @@ INHIBIT_IDLE = 8
 class SessionManager:
 
     def __init__(self, client_name):
-        if lsb_release.get_distro_information()['DESCRIPTION'] == 'Gecos V2 Lite':
-            SM_DBUS_SERVICE = 'org.lxde.SessionManager'
-            SM_DBUS_OBJECT_PATH = '/org/lxde/SessionManager'
-            SM_DBUS_CLIENT_PRIVATE_PATH = 'org.lxde.SessionManager.ClientPrivate'
 
         self.state = 0
         self.sm_proxy = None
