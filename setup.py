@@ -173,7 +173,7 @@ class Clean(Command):
 
 DistUtilsExtra.auto.setup(
     name='firstart',
-    version='0.8-0gecos3',
+    version='0.9-0gecos1',
     license='GPL-2',
     author='Antonio Hernández',
     author_email='ahernandez@emergya.com',

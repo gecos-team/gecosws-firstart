@@ -2,7 +2,7 @@
 Type=Application
 Name=GECOS First-start assistant
 Exec=__firstart_prefix__/bin/python __firstart_prefix__/bin/firstart
-OnlyShowIn=GNOME;Unity;
+OnlyShowIn=GNOME;Unity;LXDE
 NoDisplay=true
 StartupNotify=false
 X-GNOME-Autostart-Phase=Application

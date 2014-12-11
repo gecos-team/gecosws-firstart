@@ -69,6 +69,15 @@ class FirstartWindow(Window):
         self.dbusclient = DBusClient()
         self.dbusclient.connect('state-changed', self.on_dbusclient_state_changed)
 
+#        try:
+#            self.dbusclient.start()
+#            self.dbusclient.user_login()
+#            state = self.dbusclient.get_state(reply_handler=self.reply_handler, error_handler=self.error_handler)
+#
+#        except Exception as e:
+#            self.unblock()
+
+    def launch_dbus_signal(self):
         try:
             self.dbusclient.start()
             self.dbusclient.user_login()

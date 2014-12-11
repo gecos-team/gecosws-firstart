@@ -19,6 +19,15 @@
 __author__ = "Antonio Hernández <ahernandez@emergya.com>"
 __copyright__ = "Copyright (C) 2011, Junta de Andalucía <devmaster@guadalinex.org>"
 __license__ = "GPL-2"
+import threading
+import time
+class DbusThread(threading.Thread):
+    def __init__(self, fwindow):
+        self.fwindow = fwindow
+        threading.Thread.__init__(self)
+
+    def run(self):
+        self.fwindow.launch_dbus_signal()
 
 
 def chef_is_configured():
@@ -60,4 +69,11 @@ def main():
 
     w = FirstartWindow()
     w.show()
+    thread = DbusThread(w)
+    thread.daemon = True
+    thread.start()
+    while thread.isAlive():
+        time.sleep(0.09)
+        while Gtk.events_pending():
+            Gtk.main_iteration()
     Gtk.main()
