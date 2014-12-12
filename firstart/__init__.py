@@ -21,6 +21,8 @@ __copyright__ = "Copyright (C) 2011, Junta de Andalucía <devmaster@guadalinex.o
 __license__ = "GPL-2"
 import threading
 import time
+import lsb_release
+import traceback
 class DbusThread(threading.Thread):
     def __init__(self, fwindow):
         self.fwindow = fwindow
@@ -58,22 +60,26 @@ def main():
     from firstart_lib.FirstartEntry import FirstartEntry
     from assistant.FirstartWindow import FirstartWindow
     import os
-
+    if lsb_release.get_distro_information()['DESCRIPTION'] == 'Gecos V2 Lite':
+        time.sleep(3)
     entry = FirstartEntry()
     if entry.get_firstart() == True:
         return
-
-    entry.set_firstart(1)
-    entry.remove_flag()
-
-
-    w = FirstartWindow()
-    w.show()
-    thread = DbusThread(w)
-    thread.daemon = True
-    thread.start()
-    while thread.isAlive():
-        time.sleep(0.09)
-        while Gtk.events_pending():
-            Gtk.main_iteration()
-    Gtk.main()
+    
+    try:
+        entry.set_firstart(1)
+        entry.remove_flag()
+        w = FirstartWindow()
+        w.show()
+        thread = DbusThread(w)
+        thread.daemon = True
+        thread.start()
+        while thread.isAlive():
+            time.sleep(0.09)
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+        Gtk.main()
+    except Exception as e:
+        fp = open("/tmp/firstart.err", "w")
+        fp.write(str(e))
+        fp.close()
