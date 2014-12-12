@@ -82,11 +82,12 @@ class DBusService(dbus.service.Object):
         if tries<30:
             envs = os.environ
             envs['LANG'] = 'es_ES.UTF-8'
-            cmd = 'chef-client'
+            cmd = 'chef-client-wrapper'
             self.log('Calling subprocess: ' + cmd)
             args = shlex.split(cmd)
             self.process = subprocess.Popen(args,stdout=log_chef_solo, stderr=log_chef_solo_err, env=envs)
             self.process.wait()
+            time.sleep(16)
             self.process = subprocess.Popen(args,stdout=log_chef_solo1, stderr=log_chef_solo_err1, env=envs)
             self.process.wait()
 
